@@ -36,7 +36,7 @@ class AbstractManager
     public function getById($id)
     {
         return $this->extractEntity(
-            $this->persister->select($this->tableName, '*', ['id' => $id])
+            $this->persister->select($this->tableName, '*', ['id' => $id])[0]
         );
     }
 
