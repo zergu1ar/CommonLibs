@@ -1,8 +1,16 @@
 {
+    "name": "zergular/common",
+    "type": "library",
+    "description": "Common classes to work with DB via Medoo by ORM",
+    "authors": [
+        {
+            "name": "Alexey Loskutov",
+            "email": "mail@zergular.com"
+        }
+    ],
     "require": {
         "catfan/medoo": "^1.4"
     },
-
     "autoload": {
         "psr-4": {
             "Zerguar\\Common\\": "src/"
