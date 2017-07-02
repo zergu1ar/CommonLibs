@@ -87,10 +87,12 @@ class AbstractEntity
     }
 
     /**
+     * @param string[] $skipFields
+     *
      * @return array
      */
-    public function toArray()
+    public function toArray($skipFields = ['id'])
     {
-        return array_diff_key(get_object_vars($this), ['id' => 0]);
+        return array_diff_key(get_object_vars($this), array_flip($skipFields));
     }
 }
