@@ -72,7 +72,8 @@ class AbstractManager
                 $this->persister->update($this->tableName, $entity->toArray(), ['id' => $id]);
             } else {
                 $entity->setCreated($time);
-                $this->persister->insert($this->tableName, $entity->toArray());
+                $this->persister->insert($this->tableName, $entity->toArray([]));
+                $entity->setId($this->persister->id());
             }
         } catch (\Exception $e) {
             return NULL;
