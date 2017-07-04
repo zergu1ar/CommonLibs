@@ -130,4 +130,13 @@ class AbstractManager
         }
         return NULL;
     }
+
+    /**
+     * @param array $cond
+     * @return bool|\PDOStatement
+     */
+    public function delete($cond = [])
+    {
+        return $this->persister->delete($this->tableName, $cond);
+    }
 }
