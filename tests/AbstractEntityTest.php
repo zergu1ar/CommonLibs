@@ -68,7 +68,7 @@ class AbstractEntityTest extends \PHPUnit_Framework_TestCase
      */
     public function testNonExistsSetterOrGetter($name, $param, $expected)
     {
-        $this->expectException($expected);
+        $this->setExpectedException($expected);
         $entity = new AbstractEntity;
         $entity->{$name}($param);
     }

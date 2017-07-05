@@ -18,7 +18,8 @@
     }
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.3"
+    "phpunit/phpunit": "^4.8",
+    "phpunit/php-code-coverage": "^2.0"
   },
   "autoload-dev": {
     "psr-4": {

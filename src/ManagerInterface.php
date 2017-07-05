@@ -45,7 +45,7 @@ interface ManagerInterface
 
     /**
      * @param array $cond
-     * @return bool|\Traversable
+     * @return \Traversable
      */
     public function delete($cond = []);
 }
