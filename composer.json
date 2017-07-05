@@ -1,19 +1,28 @@
 {
-    "name": "zergular/common",
-    "type": "library",
-    "description": "Common classes to work with DB via Medoo by ORM",
-    "authors": [
-        {
-            "name": "Alexey Loskutov",
-            "email": "mail@zergular.com"
-        }
-    ],
-    "require": {
-        "catfan/medoo": "^1.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zergular\\Common\\": "src/"
-        }
+  "name": "zergular/common",
+  "type": "library",
+  "description": "Common classes to work with DB via Medoo by ORM",
+  "authors": [
+    {
+      "name": "Alexey Loskutov",
+      "email": "mail@zergular.com"
     }
+  ],
+  "version": "0.1",
+  "require": {
+    "catfan/medoo": "^1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Zergular\\Common\\": "src/"
+    }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.3"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Zergular\\Common\\Tests\\": "tests/"
+    }
+  }
 }

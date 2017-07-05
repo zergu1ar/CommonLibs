@@ -1,19 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexey
- * Date: 01.07.17
- * Time: 12:27
- */
 
 namespace Zergular\Common;
 
 use Medoo\Medoo;
 
+/**
+ * Class AbstractManager
+ * @package Zergular\Common
+ */
 class AbstractManager
 {
-
-    /** @var \Medoo */
+    /** @var Medoo */
     protected $persister;
     /** @var string */
     protected $tableName;
@@ -29,9 +26,7 @@ class AbstractManager
     }
 
     /**
-     * @param int $id
-     *
-     * @return AbstractEntity
+     * @inheritdoc
      */
     public function getById($id)
     {
@@ -43,26 +38,29 @@ class AbstractManager
     /**
      * @param array $data
      *
+     * @throws UnknownMethodException
      * @return AbstractEntity
      */
     protected function extractEntity($data)
     {
-        if (is_array($data)) {
-            $entity = new $this->entityName;
-            foreach ($data as $key => $value) {
-                $entity->{'set' . ucfirst($key)}($value);
+        try {
+            if (is_array($data)) {
+                $entity = new $this->entityName;
+                foreach ($data as $key => $value) {
+                    $entity->{'set' . ucfirst($key)}($value);
+                }
+                return $entity;
             }
-            return $entity;
+        } catch (\Exception $e) {
+            error_log($e->getMessage(), E_USER_WARNING);
         }
         return NULL;
     }
 
     /**
-     * @param AbstractEntity $entity
-     *
-     * @return AbstractEntity
+     * @inheritdoc
      */
-    public function save(AbstractEntity $entity)
+    public function save(EntityInterface $entity)
     {
         $id = $entity->getId();
         $time = $this->getDateTime();
@@ -76,6 +74,7 @@ class AbstractManager
                 $entity->setId($this->persister->id());
             }
         } catch (\Exception $e) {
+            error_log($e->getMessage(), E_USER_WARNING);
             return NULL;
         }
         return $entity;
@@ -90,9 +89,7 @@ class AbstractManager
     }
 
     /**
-     * @param array $cond
-     *
-     * @return int
+     * @inheritdoc
      */
     public function getCounts($cond = [])
     {
@@ -100,41 +97,37 @@ class AbstractManager
     }
 
     /**
-     * @param array $cond
-     *
-     * @return AbstractEntity[]
+     * @inheritdoc
      */
     public function getAll($cond = [])
     {
         $results = [];
         $data = $this->persister->select($this->tableName, '*', $cond);
         foreach ($data as $row) {
-            $results[] = $this->extractEntity($row);
+            $entity = $this->extractEntity($row);
+            if ($entity) {
+                $results[] = $entity;
+            }
         }
         return $results;
     }
 
     /**
-     * @param array $cond
-     *
-     * @return AbstractEntity
+     * @inheritdoc
      */
     public function getOne($cond = [])
     {
-        $data = $this->persister->get(
-            $this->tableName,
-            '*',
-            $cond
+        return $this->extractEntity(
+            $this->persister->get(
+                $this->tableName,
+                '*',
+                $cond
+            )
         );
-        if ($data) {
-            return $this->extractEntity($data);
-        }
-        return NULL;
     }
 
     /**
-     * @param array $cond
-     * @return bool|\PDOStatement
+     * @inheritdoc
      */
     public function delete($cond = [])
     {

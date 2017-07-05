@@ -1,16 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexey
- * Date: 01.07.17
- * Time: 12:50
- */
 
 namespace Zergular\Common;
 
-use Zergular\Common\Exception\UnknownMethod;
-
-class AbstractEntity
+/**
+ * Class AbstractEntity
+ * @package Zergular\Common
+ */
+class AbstractEntity implements EntityInterface
 {
     /** @var int */
     protected $id;
@@ -20,7 +16,19 @@ class AbstractEntity
     protected $updated;
 
     /**
-     * @return int
+     * @param string $method
+     * @param mixed $args
+     * @return mixed
+     *
+     * @throws UnknownMethodException
+     */
+    public function __call($method, $args)
+    {
+        throw new UnknownMethodException($method);
+    }
+
+    /**
+     * @inheritdoc
      */
     public function getId()
     {
@@ -28,9 +36,7 @@ class AbstractEntity
     }
 
     /**
-     * @param int $id
-     *
-     * @return $this
+     * @inheritdoc
      */
     public function setId($id)
     {
@@ -39,7 +45,7 @@ class AbstractEntity
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getCreated()
     {
@@ -47,17 +53,16 @@ class AbstractEntity
     }
 
     /**
-     * @param string $created
-     *
-     * @return $this
+     * @inheritdoc
      */
     public function setCreated($created)
     {
         $this->created = $created;
+        return $this;
     }
 
     /**
-     * @return string
+     * @inheritdoc
      */
     public function getUpdated()
     {
@@ -65,31 +70,16 @@ class AbstractEntity
     }
 
     /**
-     * @param string $updated
-     *
-     * @return $this
+     * @inheritdoc
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+        return $this;
     }
 
     /**
-     * @param string $method
-     * @param mixed $args
-     * @return mixed
-     *
-     * @throws UnknownMethod
-     */
-    public function __call($method, $args)
-    {
-        throw new UnknownMethod($method);
-    }
-
-    /**
-     * @param string[] $skipFields
-     *
-     * @return array
+     * @inheritdoc
      */
     public function toArray($skipFields = ['id'])
     {
