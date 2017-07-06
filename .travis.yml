@@ -9,4 +9,3 @@ before_script:
 
 script:
   - /usr/bin/php ./vendor/phpunit/phpunit/phpunit --configuration ./tests/phpunit.xml --teamcity
-  - ./vendor/bin/phpcs --standard=PSR2 --encoding=utf-8 -p src/ tests/
