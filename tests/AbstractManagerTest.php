@@ -27,6 +27,7 @@ class AbstractManagerTest extends \PHPUnit_Framework_TestCase
      * @param array|string $method
      * @param array|string $value
      * @param \Exception $throw
+     *
      * @return AbstractManager
      */
     private function getHackedManager($method, $value, $throw = null)
