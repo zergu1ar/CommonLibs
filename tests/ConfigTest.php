@@ -19,7 +19,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testSetDir($dir, $result)
     {
         Config::setDir($dir);
-        $this->expectException($result);
+        $this->setExpectedException($result);
         Config::get('db');
     }
 
