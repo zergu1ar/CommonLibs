@@ -2,6 +2,7 @@
   "name": "zergular/common",
   "type": "library",
   "description": "Common classes to work with DB via Medoo by ORM",
+  "license": "MIT",
   "authors": [
     {
       "name": "Alexey Loskutov",
