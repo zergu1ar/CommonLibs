@@ -34,7 +34,7 @@ class AbstractManager
         return $this->extractEntity(
             empty($record)
                 ? array()
-                : $record
+                : $record[0]
         );
     }
 
