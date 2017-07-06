@@ -33,7 +33,7 @@ class AbstractManager
         $record = $this->persister->select($this->tableName, '*', ['id' => $id]);
         return $this->extractEntity(
             empty($record)
-                ? array()
+                ? NULL
                 : $record[0]
         );
     }
