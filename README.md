@@ -1,5 +1,6 @@
 # CommonLibs
-Common classes
+Common classes:
+* Config
+* AbstractEntity
+* AbstractManager
 
-
-TODO: tests for php classes
